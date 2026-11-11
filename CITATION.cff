@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this hardware specification or reference compiler, please cite it as below."
+authors:
+  - family-names: "Mikami"
+    given-names: "Polar"
+    alias: "Pola Mikami"
+    affiliation: "Studio uranaisu"
+  - family-names: "Yuzu"
+    given-names: "Nanota"
+    affiliation: "Studio uranaisu"
+title: "The Isomorphic Hardware of Occult Systems: Unifying Aristotelian Physical Primitives, Dorothean Triplicities, and Wu Xing Dynamics"
+version: 1.0.0
+date-released: 2026-11-11
+url: "https://github.com/uranaisu-g/isomorphic-occult-hardware"
+license: "MIT"
+keywords:
+  - "astrology"
+  - "hellenistic-astrology"
+  - "wu-xing"
+  - "computational-ontology"
+  - "dorotheus"
+  - "tarot-geometry"
+  - "taijitu"
