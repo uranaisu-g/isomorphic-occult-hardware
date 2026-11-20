@@ -8,10 +8,19 @@
 
 ### Revision History
 
-| Version | Date | Change |
-| :--- | :--- | :--- |
-| 1.0 | 2026-11-11 | Initial public release. |
-| 1.1 | 2026-11-21 | Terminology separated: **Western Earth Triplicity** (Taurus / Virgo / Capricorn ≡ Metal 金) versus **Wu Xing Earth (土)** (the extra-elemental buffer `&`), applied throughout §§4.4, 5.1, 5.4, 6 and Figure 1. §5.1: the duplicated "Physics of the Harvest" passage removed. §5.3 / §5.4: duplicate section number repaired. §2.1: the Cold primitive supported by the Cold Reading / Cold Case / Cold-Pressed proof. §5.4: the 4-versus-3 count asymmetry stated as structural proof of the `&` operator. §5.1: Gou no Tora / Hinoeuma marked as sociological corroboration, not derivation. §6: listing synchronised with `compiler/core_primitives.py` v1.1, which now executes and passes its own terminology assertions. Figure 1 relabeled and redrawn (label collisions fixed). Proofreading: planetary glyphs replaced by Unicode, repository identifier corrected, Zi double-hour corrected to 23:30–01:30. |
+**1.0 — November 11, 2026.** Initial public release.
+
+**1.1 — November 21, 2026.**
+
+- **Terminology separated.** *Western Earth Triplicity* (Taurus / Virgo / Capricorn ≡ Metal 金) and *Wu Xing Earth (土)*, the extra-elemental buffer `&`, are now named apart throughout §§4.4, 5.1, 5.4 and 6, in Figure 1, and in the reference compiler.
+- **§5.1:** the duplicated "Physics of the Harvest" passage removed; the argument now appears once, as a numbered sequence.
+- **§5.3 / §5.4:** duplicate section number repaired (the second 5.3 became 5.4).
+- **§2.1:** the Cold primitive supported by the Cold Reading / Cold Case / Cold-Pressed triad — no heat added, object received whole.
+- **§5.4:** the 4-versus-3 count asymmetry written out as the structural proof of the `&` operator.
+- **§5.1:** Gou no Tora (五黄の寅) and Hinoeuma (丙午) marked as sociological corroboration (社会的傍証), not as a deductive derivation.
+- **§6:** the listing is now identical to `compiler/core_primitives.py` v1.1, which executes cleanly and passes `assert_terminology()`.
+- **Figure 1:** relabeled (`WESTERN EARTH TRIPLICITY · TAURUS · VIRGO · CAPRICORN ≡ METAL (金)`), the `DRY (Autonomy)` label no longer crosses the primitives frame, and the Wu Xing Earth buffer band is drawn between the hemispheres.
+- **Proofreading:** planetary glyphs replaced by Unicode, the repository identifier corrected, and the Zi (子) double-hour corrected to 23:30–01:30.
 
 ---
 
