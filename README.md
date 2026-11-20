@@ -42,7 +42,7 @@ The specification uses two expressions that must never be swapped:
 
 ### What this specification does *not* claim
 
-Version 1.1 matched each Wu Xing phase to a triple of Earthly Branches and called that triple the phase's "root signs". **That correspondence is withdrawn in 1.2** — a branch is a position on the ecliptic dial and a triplicity is a set of signs, and the match was asserted rather than derived. A phase is defined by its two primitives and by nothing else. The compiler enforces this: `assert_terminology()` fails if any sign or branch table is reintroduced.
+Version 1.1 matched each Wu Xing phase to a triple of Earthly Branches and called that triple the phase's "root signs". **That correspondence is withdrawn in 1.2** — a branch is a position on the ecliptic dial and a triplicity is a set of signs, and the match was asserted rather than derived. A phase is defined by its two primitives and by nothing else. The compiler enforces this: `assert_terminology()` fails if the `root_signs` table or the `WUXING_ZODIAC_MAPPING` key is reintroduced.
 
 ---
 
