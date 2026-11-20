@@ -9,7 +9,7 @@ authors:
     given-names: "Nanota"
     affiliation: "Studio uranaisu"
 title: "The Isomorphic Hardware of Occult Systems: Unifying Aristotelian Physical Primitives, Dorothean Triplicities, and Wu Xing Dynamics"
-version: 1.1.0
+version: 1.2.0
 date-released: 2026-11-21
 url: "https://github.com/uranaisu-g/isomorphic-occult-hardware"
 license: "MIT"
@@ -22,4 +22,4 @@ keywords:
   - "tarot-geometry"
   - "taijitu"
   - "cold-reading"
-notes: "Version 1.0 released 2026-11-11; Version 1.1 (terminology split between the Western Earth Triplicity and Wu Xing Earth, section 5.1 duplication repair, section 5.4 count-asymmetry proof, compiler verification) released 2026-11-21."
+notes: "Version 1.0 released 2026-11-11; Version 1.1 released 2026-11-21 (terminology split between the Western Earth Triplicity and Wu Xing Earth, compiler verification); Version 1.2 released 2026-11-21 (branch/root-sign correspondence withdrawn, integrated-matrix figure removed and remaining figures renumbered, section 5 rebuilt on the Taijitu-vs-element-plane comparison, the measured sky, and five cultural parallels recorded as corroboration only)."

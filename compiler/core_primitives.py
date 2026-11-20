@@ -1,5 +1,5 @@
 # ==============================================================================
-# UNIVERSAL METAPHYSICAL HARDWARE COMPILER (v1.1)
+# UNIVERSAL METAPHYSICAL HARDWARE COMPILER (v1.2)
 # The Isomorphic Hardware of Occult Systems
 # Lead Theorist: Polar Mikami (Studio uranaisu)
 # System Architecture: Nanota Yuzu (Studio uranaisu)
@@ -9,16 +9,22 @@
 # THIS MODULE IS A LOGICAL COMPILER OF PHYSICAL PRIMITIVES.
 # ANY DEVIATION INTO ASTROLOGICAL CLICHES RAISES KernelViolationError.
 #
-# TERMINOLOGY (v1.1) -- READ BEFORE EDITING
+# TERMINOLOGY (v1.2) -- READ BEFORE EDITING
 #   WESTERN EARTH TRIPLICITY = Taurus / Virgo / Capricorn = COLD x DRY
 #                             = Wu Xing METAL (金).  It IS a zodiac element.
 #   WU XING EARTH (土)        = the extra-elemental phase buffer interface ('&')
 #                             between the Hot and Cold hemispheres.
 #                             It is NOT a zodiac element and owns no triplicity.
 #   Never write a bare "Earth" in this file: name which of the two is meant.
+#
+# SCOPE (v1.2) -- WHAT THIS MODULE DELIBERATELY DOES NOT CONTAIN
+#   Through v1.1 this module listed a triple of Earthly Branches for each
+#   Wu Xing phase ("root signs"). That table is withdrawn. No phase is
+#   defined by a list of signs or branches: a phase is whatever its two
+#   primitives do. assert_terminology() fails if such a table returns.
 # ==============================================================================
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, Tuple
 
 
 class KernelViolationError(Exception):
@@ -99,26 +105,103 @@ class UniversalOccultCompiler:
         },
     }
 
-    WUXING_ISOMORPHISMS: Dict[str, Any] = {
-        "WOOD (木 = AIR / Hot x Wet)": (
-            "Intellectual autonomy, atmospheric circulation, interrogation of authority "
-            "('Gou no Tora' / 'Hinoeuma': sociological corroboration only, not a derivation)."
-        ),
-        "METAL (金 = WESTERN EARTH TRIPLICITY / Cold x Dry)": (
-            "Harvest mechanics, desiccation, cold storage, currency fixation. "
-            "Identical to Taurus / Virgo / Capricorn, not to Wu Xing Earth (土)."
-        ),
-        "WATER (水 = WATER / Cold x Wet)": "Somatic tidal container, nocturnal dissolution.",
-        "FIRE (火 = FIRE / Hot x Dry)": "High-pressure combustion, solar propulsion.",
-        "EARTH (土 = INTERFACE '&')": (
-            "Extra-elemental phase buffer between the Hot and Cold hemispheres. "
-            "No root signs, no triplicity, no suit: an operator, not a member."
-        ),
-        "SOLSTITIAL_CORES": {
-            "WINTER_SOLSTICE (子)": "Maximum Yin holding the fiery arrow of Sagittarius.",
-            "SUMMER_SOLSTICE (未)": "Maximum Yang holding the cooling dew of Cancer.",
+    # A phase is defined by what its primitives do, never by a list of signs.
+    # EARTH (土) carries no state: it is the operator '&' between the hemispheres.
+    WUXING_PHASES: Dict[str, Dict[str, Any]] = {
+        "WOOD (木)": {
+            "state": ("HOT", "WET"),
+            "western_equivalent": "Air (Hot x Wet)",
+            "mechanical_definition": (
+                "Outward thrust that enters and dissolves every boundary it meets: "
+                "a question is the mechanical form of this state."
+            ),
+        },
+        "FIRE (火)": {
+            "state": ("HOT", "DRY"),
+            "western_equivalent": "Fire (Hot x Dry)",
+            "mechanical_definition": "Internal high-pressure combustion and unyielding forward thrust.",
+        },
+        "WATER (水)": {
+            "state": ("COLD", "WET"),
+            "western_equivalent": "Water (Cold x Wet)",
+            "mechanical_definition": "Nocturnal tidal container, somatic dissolution, whole-object capture.",
+        },
+        "METAL (金)": {
+            "state": ("COLD", "DRY"),
+            "western_equivalent": "Western Earth Triplicity (Taurus / Virgo / Capricorn)",
+            "mechanical_definition": (
+                "Severance, desiccation and cold storage of the harvest: living yield "
+                "fixed into an immutable token. Identical to the Western earth "
+                "triplicity, not to Wu Xing Earth (土)."
+            ),
+        },
+        "EARTH (土)": {
+            "state": None,
+            "western_equivalent": None,
+            "operator": "&",
+            "mechanical_definition": (
+                "Extra-elemental phase buffer between the Hot and Cold hemispheres: "
+                "the centre, the 土用 (Doyo) nodes before each seasonal turn, and the "
+                "S-curve of the Taijitu. Not a zodiac element; no suit, no engine."
+            ),
         },
     }
+
+    # Recorded because communities organised practice around these seasons.
+    # Every entry is marked corroboration only: none is a premise of any
+    # derivation in the paper, and assert_terminology() enforces the marking.
+    CULTURAL_PARALLELS: List[Dict[str, str]] = [
+        {
+            "motif": "The refused bride: Gou no Tora (五黄の寅) and Hinoeuma (丙午)",
+            "season": "Wood (Hot x Wet) and Fire (Hot x Dry) carried into a Cold household",
+            "reading": (
+                "A patriarchal house read an outward vector it could not contain as a "
+                "threat to the house itself, and said so in its own words."
+            ),
+            "status": "corroboration only -- not a derivation",
+        },
+        {
+            "motif": "Tori-no-ichi (酉の市, the November market of the rooster days)",
+            "season": "Metal (Cold x Dry): the harvest completed and fixed",
+            "reading": (
+                "The kumade is the farm rake applied to fortune: sweep up, hold, and "
+                "keep the year's yield. The money rite is held exactly when the "
+                "harvest is in and the year's accounts are about to close."
+            ),
+            "status": "corroboration only -- not a derivation",
+        },
+        {
+            "motif": "Daikokuten and the rat (大黒天と鼠)",
+            "season": "Zi (子): true north, midwinter, the store",
+            "reading": (
+                "At the coldest gate nothing grows and only stock survives; the rat is "
+                "the tenant of the granary, and Daikokuten sits on the rice bale. "
+                "In the Kojiki the rat saves Okuninushi by sending him underground, "
+                "away from the fire -- the same move as the winter seed."
+            ),
+            "status": "corroboration only -- not a derivation",
+        },
+        {
+            "motif": "The snake's money (巳の金運): Benzaiten and the coin-washing spring",
+            "season": "Cold-hemisphere value passed through a Wet medium",
+            "reading": (
+                "Value is a Cold object: it exists by being held. The coin is washed in "
+                "spring water and returns increased -- the hoard circulated instead of "
+                "merely stored, the Wet complement of the Dry rake of 酉."
+            ),
+            "status": "corroboration only -- not a derivation",
+        },
+        {
+            "motif": "The boar's straight charge (亥の猪突猛進) and Inoko (亥の子)",
+            "season": "Fire (Hot x Dry) kindled at the gate of maximum Water",
+            "reading": (
+                "The branch is Water in the five-phase assignment, and on its day the "
+                "first hearth of winter is opened because fire lit under Water cannot "
+                "burn the house. The tradition states the reversal itself."
+            ),
+            "status": "corroboration only -- not a derivation",
+        },
+    ]
 
     FORBIDDEN_POETRY: List[str] = [
         "優しさ", "受容", "運命", "神秘", "癒やし", "吉凶",
@@ -142,23 +225,45 @@ class UniversalOccultCompiler:
         return cls.SUIT_MAPPINGS[suit_key]
 
     @classmethod
+    def compile_phase(cls, phase_name: str) -> Dict[str, Any]:
+        phase_key = phase_name.upper()
+        if phase_key not in cls.WUXING_PHASES:
+            raise KeyError(f"Unknown phase: {phase_name}")
+        return cls.WUXING_PHASES[phase_key]
+
+    @classmethod
     def assert_terminology(cls) -> bool:
-        """v1.1 structural self-check: Western Earth vs Wu Xing Earth."""
+        """v1.2 structural self-check: Earth vs Metal, and no branch tables."""
         pentacles = cls.SUIT_MAPPINGS["PENTACLES"]
         assert pentacles["state"] == ("COLD", "DRY")
         assert "WESTERN EARTH TRIPLICITY" in pentacles["element"]
         assert "NOT Wu Xing Earth" in pentacles["element"]
 
-        mapping = UNIVERSAL_COORDINATES["WUXING_ZODIAC_MAPPING"]
-        buffer_phase = mapping["EARTH_BUFFER (土 = Interface '&' / Phase Buffer)"]
-        assert buffer_phase["root_signs"] is None, "Wu Xing Earth must own no zodiac signs."
+        earth: Dict[str, Any] = cls.WUXING_PHASES["EARTH (土)"]
+        assert earth["state"] is None, "Wu Xing Earth has no primitive state."
+        assert earth["western_equivalent"] is None, "Wu Xing Earth has no zodiac equivalent."
+        assert earth["operator"] == "&"
 
-        metal = mapping["METAL_WESTERN_EARTH (金 = Cold x Dry / Western Earth Triplicity / Harvest)"]
-        assert metal["root_signs"] == [
-            "Taurus / 巳 (Western Earth Triplicity)",
-            "Virgo / 酉 (Western Earth Triplicity)",
-            "Capricorn / 丑 (Western Earth Triplicity)",
+        # Every other phase is a state of exactly two primitives, and nothing else.
+        four: List[Tuple[str, Tuple[str, str]]] = [
+            ("WOOD (木)", ("HOT", "WET")),
+            ("FIRE (火)", ("HOT", "DRY")),
+            ("WATER (水)", ("COLD", "WET")),
+            ("METAL (金)", ("COLD", "DRY")),
         ]
+        for phase, state in four:
+            assert cls.WUXING_PHASES[phase]["state"] == state, f"{phase} lost its primitives."
+        assert len(cls.WUXING_PHASES) == 5
+
+        # Regression guard: the withdrawn branch/root-sign tables must not return.
+        assert "root_signs" not in repr(cls.WUXING_PHASES)
+        assert "root_signs" not in repr(UNIVERSAL_COORDINATES)
+        assert "WUXING_ZODIAC_MAPPING" not in repr(UNIVERSAL_COORDINATES)
+
+        # Cultural material carries its own status line, and it is never a premise.
+        assert len(cls.CULTURAL_PARALLELS) == 5
+        for parallel in cls.CULTURAL_PARALLELS:
+            assert parallel["status"].startswith("corroboration only")
         return True
 
 
@@ -170,47 +275,29 @@ UNIVERSAL_COORDINATES: Dict[str, Any] = {
         "WET": "Diffusion / Permeation / Dissolution (融解・透過・境界の液状化)",
     },
 
-    "WUXING_ZODIAC_MAPPING": {
-        "WOOD_AIR (木 = Hot x Wet / Air / Interrogation)": {
-            "root_signs": ["Aquarius / 寅 (Air)", "Gemini / 午 (Air)", "Libra / 戌 (Air)"],
-            "mechanical_definition": (
-                "Intellectual autonomy, questioning of authority ('Gou no Tora' / 'Hinoeuma'), "
-                "atmospheric dissemination."
-            ),
-        },
-        "METAL_WESTERN_EARTH (金 = Cold x Dry / Western Earth Triplicity / Harvest)": {
-            "root_signs": [
-                "Taurus / 巳 (Western Earth Triplicity)",
-                "Virgo / 酉 (Western Earth Triplicity)",
-                "Capricorn / 丑 (Western Earth Triplicity)",
-            ],
-            "mechanical_definition": (
-                "Pure grid extraction, structural fixation, desiccation, and absolute material "
-                "binding of the harvest."
-            ),
-        },
-        "WATER_WATER (水 = Cold x Wet / Water / Abyss)": {
-            "root_signs": ["Scorpio / 亥 (Water)", "Pisces / 卯 (Water)", "Cancer / 未 (Water)"],
-            "reversal_core": "Contains the hidden seed of Fire (Sagittarius / Hot) at the absolute depth (Winter Solstice / 子).",
-        },
-        "FIRE_FIRE (火 = Hot x Dry / Fire / Affect)": {
-            "root_signs": ["Leo / 申 (Fire)", "Sagittarius / 子 (Fire)", "Aries / 辰 (Fire)"],
-            "reversal_core": "Contains the hidden seed of Water (Cancer / Wet x Cold) at the absolute peak (Summer Solstice / 未).",
-        },
-        "EARTH_BUFFER (土 = Interface '&' / Phase Buffer)": {
-            "root_signs": None,
-            "mechanical_definition": (
-                "No zodiac sign and no triplicity: the extra-elemental buffer at 土用 (Doyō) "
-                "and at the cardinal gates between the Hot and Cold hemispheres."
-            ),
-        },
+    "HEMISPHERES": {
+        "HOT (Wood + Fire)": "Outward pressure, atmospheric circulation, active deformation of the environment.",
+        "COLD (Metal + Water)": "Containment, desiccation, somatic retention, no internal thermal noise.",
+        "EARTH (土 = '&')": "The interface between the two: a region, not a state.",
+    },
+
+    "SOLSTITIAL_CORES": {
+        "WINTER_SOLSTICE (子, true north, 0° Capricorn)": (
+            "Maximum Yin holding the fiery arrow of Sagittarius: the sector spans "
+            "23:30-01:30, so the cold gate necessarily contains part of a fire sign."
+        ),
+        "SUMMER_SOLSTICE (未, true south)": (
+            "Maximum Yang holding the cooling dew of Cancer: the peak necessarily "
+            "contains the beginning of its own decay."
+        ),
     },
 
     "AXIOMS": [
         "1. Air (Wind) = Hot x Wet = Information / Law (Saturn x Mercury = Execution of Power).",
         "2. Water (Cup) = Dorothean Triplicity (Venus + Mars + Moon) = Desire + Violence + Biological Tide.",
-        "3. Extremes contain their opposites in their core: Sub-zero contains the piercing arrow; Peak heat contains the cooling palm.",
+        "3. Extremes contain their opposites in their core: sub-zero contains the piercing arrow; peak heat contains the cooling palm.",
         "4. Metal (金) = Western Earth Triplicity (Taurus / Virgo / Capricorn) = Cold x Dry. Wu Xing Earth (土) is the buffer operator '&', not a fifth element.",
+        "5. No phase is defined by a list of signs or branches. A phase is what its primitives do.",
     ],
 }
 
@@ -221,7 +308,7 @@ def validate_input(statement: str) -> bool:
 
 
 if __name__ == "__main__":
-    print("Initializing Universal Metaphysical Hardware Compiler (v1.1)...")
+    print("Initializing Universal Metaphysical Hardware Compiler (v1.2)...")
 
     valid_statement = "The Ace of Swords executes structural constraint via Saturn-Mercury mechanics."
     assert UniversalOccultCompiler.validate_statement(valid_statement)
@@ -235,7 +322,10 @@ if __name__ == "__main__":
         print("System Fault Cleared:", err)
 
     assert UniversalOccultCompiler.compile_suit("pentacles")["state"] == ("COLD", "DRY")
+    assert UniversalOccultCompiler.compile_phase("metal (金)")["state"] == ("COLD", "DRY")
     assert UniversalOccultCompiler.assert_terminology()
 
     print("Terminology Check: Western Earth Triplicity (Metal 金) != Wu Xing Earth (土 / '&').")
+    print("Phase Check: 5 phases = 4 primitive states + 1 operator; no sign or branch table.")
+    print("Cultural Parallels: 5 motifs recorded as corroboration only, never as derivation.")
     print("Compiler Integrity: 100% Deterministic. All poetic noise purged.")
